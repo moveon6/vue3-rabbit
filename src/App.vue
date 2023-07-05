@@ -4,9 +4,17 @@
 <template>
   <!-- 一级路由出口组件 -->
   <RouterView />
+
+  <!-- 测试scss文件自动导入  -->
+  <div class="test">
+    test scss
+  </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
+.test{
+  color: $sucColor;
+}
 header {
   line-height: 1.5;
   max-height: 100vh;
