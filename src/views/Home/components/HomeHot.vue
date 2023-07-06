@@ -4,13 +4,13 @@ import { findHotAPI } from '@/apis/home';
 import { onMounted, ref } from 'vue';
 
 // 获取数据
-const hotList=ref([])
-const getHotList=async() =>{
-  const res= await findHotAPI()
-  hotList.value=res.result
+const hotList = ref([])
+const getHotList = async () => {
+  const res = await findHotAPI()
+  hotList.value = res.result
 }
 
-onMounted(()=>getHotList())
+onMounted(() => getHotList())
 </script>
 
 <template>
@@ -18,7 +18,7 @@ onMounted(()=>getHotList())
     <ul class="goods-list">
       <li v-for="item in hotList" :key="item.id">
         <RouterLink to="/">
-          <img :src="item.picture" alt="">
+          <img v-img-lazy="item.picture" :src="item.picture" alt="">
           <p class="name">{{ item.name }}</p>
           <p class="price">{{ item.price }}</p>
         </RouterLink>
