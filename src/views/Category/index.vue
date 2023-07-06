@@ -6,29 +6,32 @@ import { onMounted,ref } from 'vue';
 import { useRoute } from 'vue-router';
 import {getBannerAPI} from '@/apis/home'
 import GoodsItem from '@/views/Home/components/GoodsItem.vue'
+import { onBeforeRouteUpdate } from 'vue-router';
+import {useBanner} from '@/views/Category/composables/useBanner'
 
-// 获取数据
+// 解构赋值
+const {bannerList} =useBanner()
+// 获取分类数据
 // categoryData是object对象，用{}接受
 const categoryData=ref({})
 const route =useRoute()
-const getCategory=async()=>{
-  const res=await getCategoryAPI(route.params.id)
+const getCategory=async(id=route.params.id)=>{
+  const res=await getCategoryAPI(id)
   categoryData.value=res.result
 }
 
 onMounted(()=>getCategory())
 
-// 获取banner
-const bannerList=ref([])
-const getBanner=async()=>{
-  const res=await getBannerAPI({
-    distributionSite :'2' 
-  })
-  console.log(res);
-  bannerList.value=res.result
-}
+// 目标：路由参数变化的时候，可以把分类数据重新发送
+onBeforeRouteUpdate((to)=>{
+  console.log('路由变化了')
+  // 存在问题：使用最新的路由参数请求最新的分类数据，route.params.id数据滞后
+  console.log(to)
+  getCategory(to.params.id)
+})
 
-onMounted(()=>getBanner())
+// 获取banner
+
 </script>
 
 <template>
