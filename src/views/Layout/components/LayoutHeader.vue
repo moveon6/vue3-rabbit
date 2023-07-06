@@ -1,16 +1,7 @@
 <script setup>
-  import { getCategoryAPI } from '@/apis/layout'
-  import { onMounted, ref } from 'vue'
-  
-  // 2. 发送请求获取数据列表
-  const categoryList = ref([])
-  const getCategory = async () => {
-    const res = await getCategoryAPI()
-    categoryList.value = res.result
-    console.log(res);
-  }
-
-  onMounted(() => getCategory())
+// 使用pinia中的数据
+import { useCategoryStore } from '@/stores/category';
+const categoryStore=useCategoryStore()
 </script>
 
 <template>
@@ -21,7 +12,7 @@
       </h1>
       <ul class="app-header-nav">
         <!-- 3. v-for渲染页面 -->
-        <li class="home" v-for="item in categoryList" :key="item.id">
+        <li class="home" v-for="item in categoryStore.categoryList" :key="item.id">
           <RouterLink to="/">{{ item.name }}</RouterLink>
         </li>
       </ul>
