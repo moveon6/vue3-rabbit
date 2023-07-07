@@ -15,7 +15,7 @@ onMounted(()=>getGoods())
 <template>
   <div class="xtx-goods-page">
     <div class="container">
-      <div class="bread-container">
+      <div class="bread-container" v-if="goods.details">
         <el-breadcrumb separator=">">
           <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
           <!-- 
@@ -23,9 +23,9 @@ onMounted(()=>getGoods())
             1.可选链的语法 ?.
             2.v-if手动控制渲染时机 保证只有数据才渲染
            -->
-          <el-breadcrumb-item :to="{ path: `/category/${goods.categories?.[1].id}` }">{{ goods.categories?.[1].name }}
+          <el-breadcrumb-item :to="{ path: `/category/${goods.categories[1].id}` }">{{ goods.categories[1].name }}
           </el-breadcrumb-item>
-          <el-breadcrumb-item :to="{ path:  `/category/${goods.categories?.[0].id}` }">{{ goods.categories?.[0].name }}
+          <el-breadcrumb-item :to="{ path:  `/category/${goods.categories[0].id}` }">{{ goods.categories[0].name }}
           </el-breadcrumb-item>
           <el-breadcrumb-item>抓绒保暖，毛毛虫子儿童运动鞋</el-breadcrumb-item>
         </el-breadcrumb>
