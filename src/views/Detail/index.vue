@@ -1,6 +1,15 @@
 <script setup>
+import {getDetail} from '@/apis/detail'
+import { onMounted,ref } from 'vue';
+import { useRoute } from 'vue-router';
 
-
+const goods=ref({})
+const route=useRoute()
+const getGoods=async()=>{
+  const res=await getDetail(route.params.id)
+  goods.value=res.result
+}
+onMounted(()=>getGoods())
 </script>
 
 <template>
@@ -9,9 +18,14 @@
       <div class="bread-container">
         <el-breadcrumb separator=">">
           <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-          <el-breadcrumb-item :to="{ path: '/' }">母婴
+          <!-- 
+            错误原因：goods一开始{} {}.categories->undefined->undefined[1]
+            1.可选链的语法 ?.
+            2.v-if手动控制渲染时机 保证只有数据才渲染
+           -->
+          <el-breadcrumb-item :to="{ path: `/category/${goods.categories?.[1].id}` }">{{ goods.categories?.[1].name }}
           </el-breadcrumb-item>
-          <el-breadcrumb-item :to="{ path: '/' }">跑步鞋
+          <el-breadcrumb-item :to="{ path:  `/category/${goods.categories?.[0].id}` }">{{ goods.categories?.[0].name }}
           </el-breadcrumb-item>
           <el-breadcrumb-item>抓绒保暖，毛毛虫子儿童运动鞋</el-breadcrumb-item>
         </el-breadcrumb>
