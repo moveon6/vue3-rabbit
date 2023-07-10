@@ -15,8 +15,21 @@ const getGoods = async () => {
 onMounted(() => getGoods())
 
 // sku规格被操作时
+let skuObj={}
 const skuChange=(sku)=>{
   console.log(sku);
+  skuObj=sku
+}
+
+// (购物车)count
+const count=ref(1)
+const countChange=(count)=>{
+  console.log(count)
+}
+
+// 添加购物车
+const addCart=()=>{
+
 }
 </script>
 
@@ -98,10 +111,10 @@ const skuChange=(sku)=>{
               <XtxSku :goods="goods" @change="skuChange"></XtxSku>
 
               <!-- 数据组件 -->
-
+              <el-input-number v-model="count" @change="countChange"></el-input-number>
               <!-- 按钮组件 -->
               <div>
-                <el-button size="large" class="btn">
+                <el-button size="large" class="btn" @click="addCart">
                   加入购物车
                 </el-button>
               </div>
