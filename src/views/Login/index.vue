@@ -5,12 +5,17 @@ import { useRouter } from 'vue-router';
 
 // 表单校验（账号名+密码）
 import { ref } from 'vue';
-import {loginAPI}from '@/apis/user'
+// import {loginAPI}from '@/apis/user'
+
+// 引入pinia
+import {useUserStore} from '@/stores/user'
+// 调用函数
+const userStore=useUserStore()
 
 // 1.准备表单对象
 const form =ref({
-  account:'',
-  password:'',
+  account: '1311111111',
+  password: '123456',
   agree:true
 })
 // 2.准备规则对象
@@ -50,7 +55,8 @@ const doLogin=()=>{
     // 以valid作为判断条件，如果通过校验才执行登录逻辑
     if(valid){
       // tudo login
-      const res =await loginAPI({account,password})
+      // const res =await loginAPI({account,password})
+     await userStore.getUserInfo({account,password})
       console.log(res);
       // 1.提示用户
       ElMessage({type:'success',message:'登录成功'})

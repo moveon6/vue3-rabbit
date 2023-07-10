@@ -16,6 +16,11 @@ import { getCategory } from "@/apis/testAPI"
 import { lazyPlugin } from '@/directives'
 // 引入全局组件插件
 import { componentPlugin } from '@/components'
+// 适用于pinia持久化存储插件
+import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
+const pinia = createPinia()
+// 注册持久化插件
+pinia.use(piniaPluginPersistedstate)
 
 getCategory().then(res => {
   console.log(res);

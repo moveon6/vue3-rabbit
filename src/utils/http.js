@@ -2,6 +2,7 @@
 import axios from 'axios'
 import { ElMessage } from 'element-plus'
 import 'element-plus/theme-chalk/el-message.css'
+import { useUserStore } from '@/stores/user'
 
 // 创建axios实例
 const httpInstance = axios.create({
@@ -17,6 +18,13 @@ httpInstance.interceptors.request.use(config => {
 
 // axios响应式拦截器
 httpInstance.interceptors.response.use(res => res.data, e => {
+  // 1.从pinia获取token数据
+  const userStore = useUserStore()
+  // 2.按照后端的要求拼接token数据
+  const token = userStore.userInfo.token
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`
+  }
   // 统一错误提示
   ElMessage({
     type: 'warning',
