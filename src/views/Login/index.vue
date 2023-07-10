@@ -4,7 +4,8 @@ import { ref } from 'vue';
 // 1.准备表单对象
 const form =ref({
   account:'',
-  password:''
+  password:'',
+  agree:true
 })
 // 2.准备规则对象
 const rules={
@@ -14,7 +15,34 @@ const rules={
   password:[
   {required:true,message:'密码不能为空',trigger:'blur'},
   {min:6,max:14,message:'密码为6-14个字符',trigger:'blur'}
+  ],
+  agree:[
+    {
+      validator:(rule,value,callback)=>{
+        console.log(value);
+        if(value){
+          callback()
+        }else{
+          callback(new Error('请勾选协议'))
+        }
+      }
+    }
   ]
+}
+
+// 统一校验
+// 1.获取form组件实例
+const formRef=ref(null)
+const doLogin=()=>{
+  // 调用实例方法
+  formRef.value.validate((valid)=>{
+    // valid:所有表单都通过校验才为true
+    console.log(valid);
+    // 以valid作为判断条件，如果通过校验才执行登录逻辑
+    if(valid){
+      // tudo login
+    }
+  })
 }
 </script>
 
@@ -40,19 +68,19 @@ const rules={
         </nav>
         <div class="account-box">
           <div class="form">
-            <el-form :model="form" :rules="rules" label-position="right" label-width="60px" status-icon>
+            <el-form ref="formRef" :model="form" :rules="rules" label-position="right" label-width="60px" status-icon>
               <el-form-item prop="account" label="账户">
                 <el-input v-model="form.account" />
               </el-form-item>
               <el-form-item prop="password" label="密码">
                 <el-input v-model="form.password" />
               </el-form-item>
-              <el-form-item label-width="22px">
-                <el-checkbox size="large">
+              <el-form-item label-width="22px" prop="agree">
+                <el-checkbox size="large" v-model="form.agree">
                   我已同意隐私条款和服务条款
                 </el-checkbox>
               </el-form-item>
-              <el-button size="large" class="subBtn">点击登录</el-button>
+              <el-button size="large" class="subBtn" @click="doLogin">点击登录</el-button>
             </el-form>
           </div>
         </div>
