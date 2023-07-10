@@ -2,6 +2,7 @@
 import axios from 'axios'
 import { ElMessage } from 'element-plus'
 import 'element-plus/theme-chalk/el-message.css'
+// 导入用户相关数据
 import { useUserStore } from '@/stores/user'
 
 // 创建axios实例
