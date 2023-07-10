@@ -1,6 +1,12 @@
 <script setup>
+import { ElMessage } from 'element-plus'
+import 'element-plus/theme-chalk/el-message.css'
+import { useRouter } from 'vue-router';
+
 // 表单校验（账号名+密码）
 import { ref } from 'vue';
+import {loginAPI}from '@/apis/user'
+
 // 1.准备表单对象
 const form =ref({
   account:'',
@@ -33,17 +39,30 @@ const rules={
 // 统一校验
 // 1.获取form组件实例
 const formRef=ref(null)
+const router=useRouter()
 const doLogin=()=>{
+  // 结构赋值
+  const {account,password}=form.value
   // 调用实例方法
-  formRef.value.validate((valid)=>{
+  formRef.value.validate(async (valid)=>{
     // valid:所有表单都通过校验才为true
     console.log(valid);
     // 以valid作为判断条件，如果通过校验才执行登录逻辑
     if(valid){
       // tudo login
+      const res =await loginAPI({account,password})
+      console.log(res);
+      // 1.提示用户
+      ElMessage({type:'success',message:'登录成功'})
+      // 2. 跳转首页
+      router.replace({ path: '/' })
     }
   })
 }
+
+// 1.用户名和密码只需要通过简单的配置（看文档-复杂功能通过多个不同组件拆解）
+// 2.统一协议 自定义规则 validator:(rule,value,callback)=>{}
+// 3.统一校验 通过调用form实例的方法 validate-》true
 </script>
 
 
