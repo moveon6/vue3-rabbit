@@ -11,7 +11,7 @@ const singleCheck=(i,selected)=>{
 
 // 声明全选功能函数
 const allCheck=(selected)=>{
-  cartStore.action(selected)
+  cartStore.allCheck(selected)
 }
 </script>
 
