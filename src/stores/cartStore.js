@@ -52,6 +52,10 @@ export const useCartStore = defineStore('cart', () => {
     }
   }
 
+  // 清除购物车
+  const clearCart = () => {
+    cartList.value = []
+  }
   // 获取最新购物车列表action
   const updateNewList = async () => {
     // 2. 调用获取购物车列表接口
@@ -94,7 +98,8 @@ export const useCartStore = defineStore('cart', () => {
     isAll,
     allCheck,
     selectedCount,
-    selectedPrice
+    selectedPrice,
+    clearCart
   }
 }, {
   // pinia数据持久化，本地缓存
