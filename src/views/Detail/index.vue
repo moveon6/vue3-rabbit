@@ -3,6 +3,8 @@ import { getDetail } from '@/apis/detail'
 import { onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import DetailHot from '@/views/Detail/components/DetailHot.vue'
+import { useCartStore } from '@/stores/cartStore';
+import { ElMessage } from 'element-plus';
 // import ImageView from '@/components/ImageView/index.vue'
 // import XtxSku from '@/components/XtxSku/index.vue'
 
@@ -27,9 +29,25 @@ const countChange=(count)=>{
   console.log(count)
 }
 
+const cartStore=useCartStore()
 // 添加购物车
 const addCart=()=>{
-
+  if(skuObj.skuId){
+    // 规则已经选择 触发action
+    cartStore.addCart({
+      id:goods.value.id,
+      name:goods.value.name,
+      picture:goods.value.mainPictures[0],
+      price:goods.value.price,
+      count:goods.value,
+      skuId:skuObj.skuId,
+      attrsText:skuObj.specsText,
+      selected:true
+    })
+  }else{
+    // 规格没有选择 提示用户
+    ElMessage.warning('请选择规格')
+  }
 }
 </script>
 
