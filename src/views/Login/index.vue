@@ -8,7 +8,7 @@ import { ref } from 'vue';
 // import {loginAPI}from '@/apis/user'
 
 // 引入pinia
-import {useUserStore} from '@/stores/user'
+import {useUserStore} from '@/stores/userStore'
 // 调用函数
 const userStore=useUserStore()
 
@@ -355,4 +355,4 @@ const doLogin=()=>{
   width: 100%;
   color: #fff;
 }
-</style>
+</style>@/stores/userStore

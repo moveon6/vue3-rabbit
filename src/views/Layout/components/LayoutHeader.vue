@@ -1,6 +1,6 @@
 <script setup>
 // 使用pinia中的数据
-import { useCategoryStore } from '@/stores/category';
+import { useCategoryStore } from '@/stores/categoryStore';
 // 导入头部购物车组件
 import HeaderCart from './HeaderCart.vue'
 const categoryStore=useCategoryStore()
@@ -133,4 +133,4 @@ const categoryStore=useCategoryStore()
     }
   }
 }
-</style>
+</style>@/stores/categoryStore

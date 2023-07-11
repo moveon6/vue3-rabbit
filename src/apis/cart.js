@@ -19,3 +19,14 @@ export const findNewCartListAPI = () => {
     url: '/member/cart'
   })
 }
+
+// 获取最新的购物车列表
+export const delCartAPI = (ids) => {
+  return request({
+    url: '/member/cart',
+    method: 'DELETE',
+    data: {
+      ids
+    }
+  })
+}
