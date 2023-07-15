@@ -19,20 +19,19 @@ onMounted(() => getHotList())
       <li v-for="item in hotList" :key="item.id">
         <RouterLink to="/">
           <img v-img-lazy="item.picture" :src="item.picture" alt="">
-          <p class="name">{{ item.name }}</p>
-          <p class="price">{{ item.price }}</p>
+          <p class="name">{{ item.title }}</p>
+          <p class="price">{{ item.alt }}</p>
         </RouterLink>
       </li>
     </ul>
   </home-panel>
-  <div></div>
   <!-- 下面是插槽主体内容模版
   <ul class="goods-list">
     <li v-for="item in newList" :key="item.id">
       <RouterLink to="/">
         <img :src="item.picture" alt="" />
-        <p class="name">{{ item.name }}</p>
-        <p class="price">&yen;{{ item.price }}</p>
+        <p class="name">{{ item.title }}</p>
+        <p class="price">&yen;{{  item.alt  }}</p>
       </RouterLink>
     </li>
   </ul>
@@ -44,7 +43,7 @@ onMounted(() => getHotList())
 .goods-list {
   display: flex;
   justify-content: space-between;
-  height: 406px;
+  height: 426px;
 
   li {
     width: 306px;
@@ -67,13 +66,12 @@ onMounted(() => getHotList())
       font-size: 22px;
       padding-top: 12px;
       text-align: center;
-      text-overflow: ellipsis;
-      overflow: hidden;
-      white-space: nowrap;
+      // text-overflow: ellipsis;
     }
 
-    .price {
-      color: $priceColor;
+    .desc {
+      color: #999;
+      font-size: 18px;
     }
   }
 }

@@ -6,12 +6,12 @@
   <RouterView />
 
   <!-- 测试scss文件自动导入  -->
-  <div class="test">
+  <!-- <div class="test">
     test scss
-  </div>
+  </div> -->
 </template>
 
-<style scoped lang="scss">
+<style  lang="scss">
 .test{
   color: $sucColor;
 }

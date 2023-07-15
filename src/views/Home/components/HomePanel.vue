@@ -24,7 +24,10 @@ defineProps({
         </h3>
       </div>
       <!-- 主体内容区域 -->
-      <slot/>
+      <div>
+        <slot />
+      </div>
+  
     </div>
   </div>
 </template>
